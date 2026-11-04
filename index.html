@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Movies, Series and Anime Online</title>
+  <meta name="description" content="Catalog of the best movies, series, cartoons and anime with search, genre filters and dark/light themes.">
+  <link rel="icon" href="logo-dark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Тема ставится до отрисовки, чтобы не было мигания
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <header>
+    <div class="wrapper header-wrapper">
+      <a href="#film" class="logo_style" aria-label="Home"><img id="logo" src="logo-dark.png" alt="Logo" width="48" height="48"></a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="link_box" id="linkBox">
+        <nav class="header_links" aria-label="Account">
+          <ul>
+            <li><a href="#" class="button">Continue watching</a></li>
+            <li><a href="#" class="button">Bookmarks</a></li>
+            <li><a href="#" class="button">Profile</a></li>
+            <li><button class="button" data-open="signInModal">Sign In</button></li>
+            <li><button class="button" data-open="regModal">Register</button></li>
+          </ul>
+        </nav>
+        <label class="switch" title="Dark / light theme">
+          <input type="checkbox" id="themeToggle" aria-label="Dark theme" checked>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav_menu">
+    <nav class="wrapper nav_menu-wrapper" aria-label="Sections">
+      <ul class="ul-nav">
+        <li><a href="#film" data-cat="film">Movies</a></li>
+        <li><a href="#serial" data-cat="serial">Series</a></li>
+        <li><a href="#cartoon" data-cat="cartoon">Cartoons</a></li>
+        <li><a href="#anime" data-cat="anime">Anime</a></li>
+        <li><a href="#new" data-cat="new">New</a></li>
+        <li><a href="#announce" data-cat="announce">Announcements</a></li>
+        <li><a href="#collections" data-cat="collections">Collections</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <main class="films">
+    <h1 class="BetterFilms" id="heading">Best movies</h1>
+    <p class="back" id="back" hidden><a href="#collections">← All collections</a></p>
+    <div class="wrapper toolbar" id="toolbar">
+      <input class="field search" id="search" type="search" placeholder="Search by title" aria-label="Search by title">
+      <select class="field" id="genre" aria-label="Genre"><option value="">All genres</option></select>
+      <select class="field" id="sort" aria-label="Sort">
+        <option value="">Default order</option>
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
+        <option value="az">A–Z</option>
+      </select>
+    </div>
+    <div class="wrapper films-container" id="grid"></div>
+    <p class="empty" id="empty" hidden>Nothing found. Change your search or reset the genre.</p>
+  </main>
+
+  <nav class="navigation" aria-label="Pages">
+    <span class="current" aria-current="page">1</span>
+    <button disabled>2</button><button disabled>3</button><button disabled>4</button><button disabled>5</button>
+  </nav>
+
+  <footer>
+    <div class="wrapper footer-wrapper"><p>© <span id="year">2026</span></p></div>
+  </footer>
+
+  <dialog class="modal" id="signInModal">
+    <form method="dialog" class="modal-content" data-form>
+      <button class="close" type="submit" formnovalidate aria-label="Close">&times;</button>
+      <div class="title">Sign in</div>
+      <label class="row"><span class="sr">Username or email</span><input class="field" name="login" required autocomplete="username" placeholder="Username or email"></label>
+      <label class="row"><span class="sr">Password</span><input class="field" type="password" name="password" required autocomplete="current-password" placeholder="Password"></label>
+      <p class="form-note" role="status"></p>
+      <button class="login_btn" type="submit" value="ok">Sign In</button>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="regModal">
+    <form method="dialog" class="modal-content" data-form>
+      <button class="close" type="submit" formnovalidate aria-label="Close">&times;</button>
+      <div class="title">Quick registration</div>
+      <label class="row"><span class="sr">Email</span><input class="field" type="email" name="email" required autocomplete="email" placeholder="Email"></label>
+      <label class="row"><span class="sr">Username</span><input class="field" name="login" required autocomplete="username" placeholder="Username"></label>
+      <label class="row"><span class="sr">Password</span><input class="field" type="password" name="password" required minlength="6" autocomplete="new-password" placeholder="Password (6+ characters)"></label>
+      <p class="form-note" role="status"></p>
+      <button class="reg_btn" type="submit" value="ok">Register</button>
+    </form>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
